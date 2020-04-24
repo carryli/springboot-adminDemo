@@ -1,97 +1,120 @@
 package com.cloud.channel.backend.core;
 
-import java.io.Serializable;
-
-import com.cloud.channel.backend.business.constant.ResponseCodeEnum;
-import org.apache.commons.lang3.StringUtils;
-
-import lombok.Data;
+import com.alibaba.fastjson.JSONObject;
+import com.cloud.channel.backend.business.constant.CommonEnum;
 
 /**
- * @author by Bruce
- * @description 返回结果集
- * @date
- **/
-@Data
-public class ResponseResult implements Serializable {
-
-    private static final long serialVersionUID = 6088770867376061002L;
-
-    public static final int ERROR = -1;
-    public static final String ERROR_MESSAGE = "error!";
-    public static final int SUCCESS = 1;
-    public static final String SUCCESS_MESSAGE = "success!";
+ * @author Bruce
+ * @classname addd
+ * @description TODO
+ * @date 2020/4/24 0024 18:23
+ */
+public class ResponseResult {
     /**
-     * 返回状态
+     * 响应代码
      */
     private int code;
+
     /**
-     * 返回信息
+     * 响应消息
      */
     private String message;
+
     /**
-     * 返回数据
+     * 响应结果
      */
     private Object data;
 
-    private ResponseResult(int status, String message, Object data) {
-        super();
-        this.code = status;
+    public ResponseResult() {
+    }
+
+    public ResponseResult(BaseErrorInfoInterface errorInfo) {
+        this.code = errorInfo.getCode();
+        this.message = errorInfo.getDescription();
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
         this.message = message;
+    }
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
         this.data = data;
     }
 
     /**
-     * 成功-无参-
-     * 
+     * 成功
+     *
      * @return
      */
     public static ResponseResult success() {
-        return new ResponseResult(SUCCESS, SUCCESS_MESSAGE, null);
+        return success(null);
     }
 
     /**
-     * 成功-data
-     * 
+     * 成功
      * @param data
      * @return
      */
     public static ResponseResult success(Object data) {
-        return new ResponseResult(SUCCESS, SUCCESS_MESSAGE, data);
+        ResponseResult rb = new ResponseResult();
+        rb.setCode(CommonEnum.SUCCESS.getCode());
+        rb.setMessage(CommonEnum.SUCCESS.getDescription());
+        rb.setData(data);
+        return rb;
     }
 
     /**
-     * 失败-message
-     * 
-     * @param message
-     * @return
+     * 失败
      */
-    public static ResponseResult error(String message) {
-        return new ResponseResult(ERROR, message, null);
+    public static ResponseResult error(BaseErrorInfoInterface errorInfo) {
+        ResponseResult rb = new ResponseResult();
+        rb.setCode(errorInfo.getCode());
+        rb.setMessage(errorInfo.getDescription());
+        rb.setData(null);
+        return rb;
     }
 
     /**
-     * 失败-code 根据code拼接错误信息
-     *
-     * @param code
-     * @return
-     */
-    public static ResponseResult error(int code) {
-        String description = ResponseCodeEnum.getByCode(code).getDescription();
-        if (StringUtils.isEmpty(description)) {
-            description = "网络异常!";
-        }
-        return new ResponseResult(code, description, null);
-    }
-
-    /**
-     * 失败-code,message
-     * 
-     * @param code
-     * @param message
-     * @return
+     * 失败
      */
     public static ResponseResult error(int code, String message) {
-        return new ResponseResult(code, message, null);
+        ResponseResult rb = new ResponseResult();
+        rb.setCode(code);
+        rb.setMessage(message);
+        rb.setData(null);
+        return rb;
     }
+
+    /**
+     * 失败
+     */
+    public static ResponseResult error(String message) {
+        ResponseResult rb = new ResponseResult();
+        rb.setCode(-1);
+        rb.setMessage(message);
+        rb.setData(null);
+        return rb;
+    }
+
+    @Override
+    public String toString() {
+        return JSONObject.toJSONString(this);
+    }
+
 }

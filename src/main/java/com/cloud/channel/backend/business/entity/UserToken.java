@@ -20,6 +20,8 @@ import lombok.NoArgsConstructor;
  */
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserToken implements Serializable {
     private static final long serialVersionUID = -5013990258496698601L;
 

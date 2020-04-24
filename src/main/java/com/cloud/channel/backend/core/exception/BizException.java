@@ -1,128 +1,84 @@
 package com.cloud.channel.backend.core.exception;
 
-import com.cloud.channel.backend.business.constant.ResponseCodeEnum;
-import com.cloud.channel.backend.business.constant.ErrorCode;
-
-import lombok.Getter;
-import lombok.Setter;
+import com.cloud.channel.backend.core.BaseErrorInfoInterface;
 
 /**
- * @author by Bruce
- * @description 业务异常类信息
- * @date
- **/
-@Getter
-@Setter
+ * @author Bruce
+ * @classname BizException
+ * @description TODO
+ * @date 2020/4/24 0024 18:22
+ */
 public class BizException extends RuntimeException {
 
-    private static final long serialVersionUID = -5447213034031908793L;
+    private static final long serialVersionUID = 1L;
+
     /**
      * 错误码
      */
-    protected final ErrorCode errorCode;
-
+    protected int errorCode;
     /**
-     * 无参默认构造UNSPECIFIED
+     * 错误信息
      */
+    protected String errorMsg;
+
     public BizException() {
-        super(ResponseCodeEnum.SYSTEM_ERROR.getDescription());
-        this.errorCode = ResponseCodeEnum.SYSTEM_ERROR;
+        super();
     }
 
-    /**
-     * 指定错误码构造通用异常
-     *
-     * @param errorCode
-     *            错误码
-     */
-    public BizException(final ErrorCode errorCode) {
-        super(errorCode.getDescription());
+    public BizException(BaseErrorInfoInterface errorInfoInterface) {
+        super(errorInfoInterface.getCode()+"");
+        this.errorCode = errorInfoInterface.getCode();
+        this.errorMsg = errorInfoInterface.getDescription();
+    }
+
+    public BizException(BaseErrorInfoInterface errorInfoInterface, Throwable cause) {
+        super(errorInfoInterface.getCode()+"", cause);
+        this.errorCode = errorInfoInterface.getCode();
+        this.errorMsg = errorInfoInterface.getDescription();
+    }
+
+    public BizException(String errorMsg) {
+        super(errorMsg);
+        this.errorMsg = errorMsg;
+    }
+
+    public BizException(int errorCode, String errorMsg) {
+        super(errorCode+"");
         this.errorCode = errorCode;
+        this.errorMsg = errorMsg;
     }
 
-    /**
-     * 指定详细描述构造通用异常
-     *
-     * @param detailedMessage
-     *            详细描述
-     */
-    public BizException(final String detailedMessage) {
-        super(detailedMessage);
-        this.errorCode = ResponseCodeEnum.SYSTEM_ERROR;
-    }
-
-    /**
-     * 指定导火索构造通用异常
-     *
-     * @param t
-     *            导火索
-     */
-    public BizException(final Throwable t) {
-        super(t);
-        this.errorCode = ResponseCodeEnum.SYSTEM_ERROR;
-    }
-
-    /**
-     * 构造通用异常
-     *
-     * @param errorCode
-     *            错误码
-     * @param detailedMessage
-     *            详细描述
-     */
-    public BizException(final ErrorCode errorCode, final String detailedMessage) {
-        super(detailedMessage);
+    public BizException(int errorCode, String errorMsg, Throwable cause) {
+        super(errorCode+"", cause);
         this.errorCode = errorCode;
+        this.errorMsg = errorMsg;
     }
 
-    /**
-     * 构造通用异常
-     *
-     * @param errorCode
-     *            错误码
-     * @param t
-     *            导火索
-     */
-    public BizException(final ErrorCode errorCode, final Throwable t) {
-        super(errorCode.getDescription(), t);
-        this.errorCode = errorCode;
-    }
 
-    /**
-     * 构造通用异常
-     *
-     * @param detailedMessage
-     *            详细描述
-     * @param t
-     *            导火索
-     */
-    public BizException(final String detailedMessage, final Throwable t) {
-        super(detailedMessage, t);
-        this.errorCode = ResponseCodeEnum.SYSTEM_ERROR;
-    }
-
-    /**
-     * 构造通用异常
-     *
-     * @param errorCode
-     *            错误码
-     * @param detailedMessage
-     *            详细描述
-     * @param t
-     *            导火索
-     */
-    public BizException(final ErrorCode errorCode, final String detailedMessage, final Throwable t) {
-        super(detailedMessage, t);
-        this.errorCode = errorCode;
-    }
-
-    /**
-     * Getter method for property <tt>errorCode</tt>.
-     *
-     * @return property value of errorCode
-     */
-    public ErrorCode getErrorCode() {
+    public int getErrorCode() {
         return errorCode;
+    }
+
+    public void setErrorCode(int errorCode) {
+        this.errorCode = errorCode;
+    }
+
+    public String getErrorMsg() {
+        return errorMsg;
+    }
+
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
+    }
+
+    @Override
+    public String getMessage() {
+        return errorMsg;
+    }
+
+    @Override
+    public Throwable fillInStackTrace() {
+        return this;
     }
 
 }

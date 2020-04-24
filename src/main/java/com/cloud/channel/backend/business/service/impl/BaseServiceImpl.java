@@ -1,8 +1,6 @@
 package com.cloud.channel.backend.business.service.impl;
 
 import com.cloud.channel.backend.business.service.BaseService;
-import com.cloud.channel.backend.business.constant.ResponseCodeEnum;
-import com.cloud.channel.backend.core.exception.BizException;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
@@ -19,10 +17,11 @@ public class BaseServiceImpl implements BaseService {
 
     @Override
     public void ssss(int value) {
-        try {
-            int i = 5 / value;
-        } catch (Exception e) {
-            throw new BizException(ResponseCodeEnum.PARAM_ERROR);
-        }
+        int i = 5 / value;
+//        try {
+//            int i = 5 / value;
+//        } catch (Exception e) {
+//            throw new BizException(ResponseCodeEnum.PARAM_ERROR);
+//        }
     }
 }
