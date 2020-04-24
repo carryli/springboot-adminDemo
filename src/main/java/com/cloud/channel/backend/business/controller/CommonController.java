@@ -51,7 +51,7 @@ public class CommonController {
     public ResponseResult test2(@PathVariable int value) {
         baseService.ssss(value);
         User user = AppContext.currentUser();
-        log.info("当前用户：{}", JSONObject.toJSON(user).toString());
+        log.info("当前用户={}", JSONObject.toJSON(user).toString());
         return ResponseResult.success();
     }
 
