@@ -1,0 +1,2 @@
+gradle clearPj
+gradle build
