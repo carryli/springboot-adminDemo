@@ -1,7 +1,5 @@
 package com.cloud.channel.backend.core.exception;
 
-import com.cloud.channel.backend.core.BaseErrorInfoInterface;
-
 /**
  * @author Bruce
  * @classname BizException

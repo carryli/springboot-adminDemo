@@ -1,7 +1,8 @@
 package com.cloud.channel.backend.core;
 
 import com.alibaba.fastjson.JSONObject;
-import com.cloud.channel.backend.business.constant.CommonEnum;
+import com.cloud.channel.backend.core.exception.ResponseCodeEnum;
+import com.cloud.channel.backend.core.exception.BaseErrorInfoInterface;
 
 /**
  * @author Bruce
@@ -73,8 +74,8 @@ public class ResponseResult {
      */
     public static ResponseResult success(Object data) {
         ResponseResult rb = new ResponseResult();
-        rb.setCode(CommonEnum.SUCCESS.getCode());
-        rb.setMessage(CommonEnum.SUCCESS.getDescription());
+        rb.setCode(ResponseCodeEnum.SUCCESS.getCode());
+        rb.setMessage(ResponseCodeEnum.SUCCESS.getDescription());
         rb.setData(data);
         return rb;
     }

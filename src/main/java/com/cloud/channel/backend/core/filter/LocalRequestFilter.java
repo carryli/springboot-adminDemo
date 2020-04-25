@@ -14,7 +14,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.cloud.channel.backend.business.constant.CommonEnum;
+import com.cloud.channel.backend.core.exception.ResponseCodeEnum;
 import com.cloud.channel.backend.business.entity.UserToken;
 import com.cloud.channel.backend.business.objects.pojo.User;
 import com.cloud.channel.backend.business.service.UserTokenService;
@@ -53,7 +53,7 @@ public class LocalRequestFilter extends OncePerRequestFilter {
         // 构建responseResult
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json; charset=utf-8");
-        ResponseResult error = ResponseResult.error(CommonEnum.AUTH_FAILED);
+        ResponseResult error = ResponseResult.error(ResponseCodeEnum.AUTH_FAILED);
         error.setData(null);
         return JSONObject.toJSONString(error, SerializerFeature.WriteMapNullValue);
     }
@@ -63,7 +63,6 @@ public class LocalRequestFilter extends OncePerRequestFilter {
         throws ServletException, IOException {
         // 获取请求头部分的Authorization
         String authHeader = request.getHeader(this.header);
-        // 如果请求路径为微信通知后台支付结果则不需要token（之后会在具体的controller中，对双方签名进行验证防钓鱼）
         String url = request.getRequestURI().substring(request.getContextPath().length());
         // 增加过滤请求 附:同时得在这里配置？ com.cloud.channel.backend.core.config.WebSecurityConfig.configure
         if ("/member/login".equals(url) || "/test".equals(url)) {

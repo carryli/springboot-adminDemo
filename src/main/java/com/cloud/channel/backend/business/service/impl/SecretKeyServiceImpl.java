@@ -3,7 +3,7 @@ package com.cloud.channel.backend.business.service.impl;
 import java.util.HashMap;
 import java.util.List;
 
-import com.cloud.channel.backend.business.constant.CommonEnum;
+import com.cloud.channel.backend.core.exception.ResponseCodeEnum;
 import com.cloud.channel.backend.business.service.SecretKeyService;
 import org.apache.commons.lang3.StringUtils;
 import com.cloud.channel.backend.business.dao.BaseDao;
@@ -133,7 +133,7 @@ public class SecretKeyServiceImpl implements SecretKeyService {
             // 转json对象
             JSONObject data = JSON.parseObject(decrypt);
             int code = data.getIntValue("code");
-            if (code != CommonEnum.SUCCESS.getCode()) {
+            if (code != ResponseCodeEnum.SUCCESS.getCode()) {
                 log.error("秘钥交换发生异常! apiUrl为: {}, cmd为: {}, 请求参数为: {}", apiUrl, cmd, params.toString());
             }
         } catch (Exception e) {
