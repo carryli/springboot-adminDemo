@@ -7,9 +7,7 @@ import com.cloud.channel.backend.core.ResponseResult;
 import com.cloud.channel.backend.core.config.AppContext;
 import com.cloud.channel.backend.core.exception.BizException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.cloud.channel.backend.business.service.BaseService;
 
@@ -41,6 +39,18 @@ public class CommonController {
             throw  new BizException(ResponseCodeEnum.SERVER_BUSY);
         }
         return true;
+    }
+
+    @PostMapping("/testJson")
+    public ResponseResult testJson(@RequestBody JSONObject jsonObject) {
+
+        return ResponseResult.success(jsonObject);
+    }
+
+    @PostMapping("/testPost")
+    public ResponseResult testPost(@RequestParam("a")String a,@RequestParam("b")String b) {
+
+        return ResponseResult.success(a+","+b);
     }
 
     @GetMapping("/test2/{value}")
