@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 /**
  * @author Bruce
  * @classname UserToken
- * @description TODO
+ * @description 用户凭证
  * @date 2020/4/23 0023 19:52
  */
 @Entity

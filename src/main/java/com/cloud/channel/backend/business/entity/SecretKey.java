@@ -7,7 +7,10 @@ import com.lamfire.jmongo.annotations.Indexed;
 import lombok.Data;
 
 /**
- * 通信密玥
+ * @Classname SecretKey
+ * @Description 通信秘钥
+ * @Date 2020/4/21 0021 10:38
+ * @author Bruce
  */
 @Entity
 @Data

@@ -1,15 +1,13 @@
 package com.cloud.channel.backend.business.controller;
 
+import org.springframework.web.bind.annotation.*;
+
 import com.alibaba.fastjson.JSONObject;
-import com.cloud.channel.backend.core.exception.ResponseCodeEnum;
 import com.cloud.channel.backend.business.objects.pojo.User;
 import com.cloud.channel.backend.core.ResponseResult;
 import com.cloud.channel.backend.core.config.AppContext;
 import com.cloud.channel.backend.core.exception.BizException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import com.cloud.channel.backend.business.service.BaseService;
+import com.cloud.channel.backend.core.exception.ResponseCodeEnum;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,9 +20,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class CommonController {
 
-    @Autowired
-    private BaseService baseService;
-
     @GetMapping("/test")
     public ResponseResult test() {
         return ResponseResult.success(444);
@@ -33,10 +28,9 @@ public class CommonController {
     @GetMapping("/test/{value}")
     public boolean testException(@PathVariable int value) {
         System.out.println("开始新增...");
-        //如果姓名为空就手动抛出一个自定义的异常！
-        baseService.ssss(value);
-        if(true){
-            throw  new BizException(ResponseCodeEnum.SERVER_BUSY);
+        // 如果姓名为空就手动抛出一个自定义的异常！
+        if (true) {
+            throw new BizException(ResponseCodeEnum.SERVER_BUSY);
         }
         return true;
     }
@@ -48,9 +42,9 @@ public class CommonController {
     }
 
     @PostMapping("/testPost")
-    public ResponseResult testPost(@RequestParam("a")String a,@RequestParam("b")String b) {
+    public ResponseResult testPost(@RequestParam("a") String a, @RequestParam("b") String b) {
 
-        return ResponseResult.success(a+","+b);
+        return ResponseResult.success(a + "," + b);
     }
 
     @GetMapping("/test2/{value}")

@@ -23,7 +23,7 @@ import com.cloud.channel.backend.core.jwt.JwtUtils;
  */
 @RestController
 @RequestMapping(value = "member")
-public class MemberController {
+public class AccountController {
 
     @Value("${jwt.tokenHead}")
     private String tokenHead;

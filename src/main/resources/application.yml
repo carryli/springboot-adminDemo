@@ -46,8 +46,6 @@ mongodb:
 # JWT相关配置
 jwt:
   header: token
-  # 过期时间
-  expiration: 864000
   tokenHead: 1024|
 
 # Log

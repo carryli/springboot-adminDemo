@@ -64,6 +64,7 @@ public class LocalRequestFilter extends OncePerRequestFilter {
         // 获取请求头部分的Authorization
         String authHeader = request.getHeader(this.header);
         String url = request.getRequestURI().substring(request.getContextPath().length());
+
         // 增加过滤请求 附:同时得在这里配置？ com.cloud.channel.backend.core.config.WebSecurityConfig.configure
         if ("/member/login".equals(url) || "/test".equals(url)) {
             chain.doFilter(request, response);
