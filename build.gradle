@@ -74,10 +74,14 @@ task copyJar(type: Copy, dependsOn: 'clearJar') {
     from configurations.compileClasspath
     into "$buildDir\\libs\\lib"
 }
-task copyJar2(type:Copy){
-    from configurations.runtime
-    into ('build/libs/lib')
+
+task pack(type: Copy, dependsOn: 'clearJar') {
+    sourceSets.main.resources.srcDirs.each {
+        from it
+        into "$buildDir\\libs"
+    }
 }
+
 bootJar {
     // 例外所有的jar
     excludes = ["*.jar"]
@@ -88,6 +92,7 @@ bootJar {
     // lib目录的清除和复制任务
     dependsOn clearJar
     dependsOn copyJar
+    dependsOn pack
 
     // 指定依赖包的路径
     manifest {
