@@ -49,7 +49,6 @@ jwt:
   tokenHead: 1024|
 
 # Log
-LOG_HOME: /data/logs
 logging:
   config:
     classpath: logback.xml

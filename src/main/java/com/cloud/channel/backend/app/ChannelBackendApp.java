@@ -42,7 +42,7 @@ public class ChannelBackendApp {
         GameCache.loadAesKey();
         // 程序关闭时一定执行的代码 调用System.exit(0)时才会触发
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            log.info("运营后台服务器准备关闭...");
+            log.info("服务器准备关闭...");
             try {
                 // 本地记录一个服务器状态,方便运维脚本处理
                 List<String> rs = new ArrayList<>();
@@ -50,9 +50,9 @@ public class ChannelBackendApp {
                 FileUtils.saveChatTxt(rs, "status.txt");
                 Thread.sleep(5000);
             } catch (InterruptedException e) {
-                log.error("运营后台服务器关闭异常：", e);
+                log.error("服务器关闭异常：", e);
             }
-            log.info("运营后台服务器关闭完成...");
+            log.info("服务器关闭完成...");
         }));
 
         List<String> rs = new ArrayList<>();
