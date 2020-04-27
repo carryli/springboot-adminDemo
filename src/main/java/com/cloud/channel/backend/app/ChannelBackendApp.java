@@ -7,9 +7,6 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cloud.channel.backend.core.config.GameCache;
-import com.cloud.channel.backend.business.service.SecretKeyService;
-import com.cloud.channel.backend.util.SpringUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -18,6 +15,9 @@ import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+import com.cloud.channel.backend.business.service.SecretKeyService;
+import com.cloud.channel.backend.core.config.GameCache;
+import com.cloud.channel.backend.util.SpringUtil;
 import com.xengine.frame.utils.FileUtils;
 
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +32,7 @@ import lombok.extern.slf4j.Slf4j;
 @EnableScheduling
 @Slf4j
 public class ChannelBackendApp {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(ChannelBackendApp.class, args);
         log.debug("启动成功");
         SecretKeyService secretKeyService = SpringUtil.getBean(SecretKeyService.class);
