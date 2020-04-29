@@ -13,14 +13,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.cloud.channel.backend.core.exception.ResponseCodeEnum;
 import com.cloud.channel.backend.business.entity.UserToken;
 import com.cloud.channel.backend.business.objects.pojo.User;
 import com.cloud.channel.backend.business.service.UserTokenService;
 import com.cloud.channel.backend.core.ResponseResult;
 import com.cloud.channel.backend.core.config.AppContext;
+import com.cloud.channel.backend.core.exception.ResponseCodeEnum;
 import com.cloud.channel.backend.core.jwt.JwtUtils;
+import com.cloud.channel.backend.util.CommonUtil;
 
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
@@ -55,7 +55,7 @@ public class LocalRequestFilter extends OncePerRequestFilter {
         response.setContentType("application/json; charset=utf-8");
         ResponseResult error = ResponseResult.error(ResponseCodeEnum.AUTH_FAILED);
         error.setData(null);
-        return JSONObject.toJSONString(error, SerializerFeature.WriteMapNullValue);
+        return CommonUtil.toJsonString(error);
     }
 
     @Override

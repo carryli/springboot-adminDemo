@@ -1,6 +1,7 @@
 package com.cloud.channel.backend.util;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Map;
@@ -40,34 +41,39 @@ public class HttpClientUtil {
      * @return 响应
      * @throws Exception
      */
-    public static String doPost(String url, String params, Map<String, String> headers) throws Exception {
-        // 请求地址
-        PostMethod postMethod = new PostMethod(url);
-        // 请求头
-        for (Map.Entry<String, String> entry : headers.entrySet()) {
-            String key = entry.getKey();
-            String value = entry.getValue();
-            postMethod.setRequestHeader(key, value);
+    public static String doPost(String url, String params, Map<String, String> headers) {
+        try {
+            // 请求地址
+            PostMethod postMethod = new PostMethod(url);
+            // 请求头
+            for (Map.Entry<String, String> entry : headers.entrySet()) {
+                String key = entry.getKey();
+                String value = entry.getValue();
+                postMethod.setRequestHeader(key, value);
+            }
+            // 请求体
+            StringRequestEntity entity = new StringRequestEntity(params, "application/json", "UTF-8");
+            postMethod.setRequestEntity(entity);
+            // 添加超时时间
+            HttpClient httpClient = new HttpClient();
+            HttpConnectionManagerParams managerParams = httpClient.getHttpConnectionManager().getParams();
+            managerParams.setConnectionTimeout(15000);
+            managerParams.setSoTimeout(20000);
+            // 执行请求
+            httpClient.executeMethod(postMethod);
+            // 响应
+            InputStream inputStream = postMethod.getResponseBodyAsStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            StringBuilder builder = new StringBuilder();
+            String str;
+            while ((str = reader.readLine()) != null) {
+                builder.append(str);
+            }
+            return builder.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        // 请求体
-        StringRequestEntity entity = new StringRequestEntity(params, "application/json", "UTF-8");
-        postMethod.setRequestEntity(entity);
-        // 添加超时时间
-        HttpClient httpClient = new HttpClient();
-        HttpConnectionManagerParams managerParams = httpClient.getHttpConnectionManager().getParams();
-        managerParams.setConnectionTimeout(15000);
-        managerParams.setSoTimeout(20000);
-        // 执行请求
-        httpClient.executeMethod(postMethod);
-        // 响应
-        InputStream inputStream = postMethod.getResponseBodyAsStream();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-        StringBuilder builder = new StringBuilder();
-        String str;
-        while ((str = reader.readLine()) != null) {
-            builder.append(str);
-        }
-        return builder.toString();
+        return "";
     }
 
     /**

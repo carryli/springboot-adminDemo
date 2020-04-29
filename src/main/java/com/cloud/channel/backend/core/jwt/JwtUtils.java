@@ -2,7 +2,8 @@ package com.cloud.channel.backend.core.jwt;
 
 import java.util.Date;
 
-import com.alibaba.fastjson.JSONObject;
+import com.cloud.channel.backend.util.CommonUtil;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -33,8 +34,8 @@ public class JwtUtils {
      * @return
      */
     public static String geneJsonWebToken(String secret, Object object) {
-        String token = Jwts.builder().setSubject(SUBJECT).claim("user", JSONObject.toJSON(object).toString()).setIssuedAt(new Date())
-            .signWith(SignatureAlgorithm.HS256, APP_SECRET).compact();
+        String token = Jwts.builder().setSubject(SUBJECT).claim("user", CommonUtil.toJsonString(object))
+            .setIssuedAt(new Date()).signWith(SignatureAlgorithm.HS256, APP_SECRET).compact();
 
         return secret + token;
     }

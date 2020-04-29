@@ -14,6 +14,15 @@ import com.alibaba.fastjson.JSONObject;
 public interface SecretKeyService {
 
     /**
+     * 发送内部请求服务
+     * @param apiUrl
+     * @param cmd
+     * @param params
+     * @return
+     */
+    JSONObject sendRequest(String apiUrl, int cmd, JSONObject params);
+
+    /**
      * 交换秘钥
      * 
      * @param cmd

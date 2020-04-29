@@ -12,12 +12,12 @@ public interface BaseErrorInfoInterface {
      *
      * @return
      */
-    int getCode();
+    int getKey();
 
     /**
      * 错误描述
      *
      * @return
      */
-    String getDescription();
+    String getValue();
 }

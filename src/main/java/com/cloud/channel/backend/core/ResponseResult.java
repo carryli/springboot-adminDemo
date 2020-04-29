@@ -1,8 +1,8 @@
 package com.cloud.channel.backend.core;
 
-import com.alibaba.fastjson.JSONObject;
-import com.cloud.channel.backend.core.exception.ResponseCodeEnum;
 import com.cloud.channel.backend.core.exception.BaseErrorInfoInterface;
+import com.cloud.channel.backend.core.exception.ResponseCodeEnum;
+import com.cloud.channel.backend.util.CommonUtil;
 
 /**
  * @author Bruce
@@ -26,12 +26,11 @@ public class ResponseResult {
      */
     private Object data;
 
-    public ResponseResult() {
-    }
+    public ResponseResult() {}
 
     public ResponseResult(BaseErrorInfoInterface errorInfo) {
-        this.code = errorInfo.getCode();
-        this.message = errorInfo.getDescription();
+        this.code = errorInfo.getKey();
+        this.message = errorInfo.getValue();
     }
 
     public int getCode() {
@@ -69,13 +68,14 @@ public class ResponseResult {
 
     /**
      * 成功
+     * 
      * @param data
      * @return
      */
     public static ResponseResult success(Object data) {
         ResponseResult rb = new ResponseResult();
-        rb.setCode(ResponseCodeEnum.SUCCESS.getCode());
-        rb.setMessage(ResponseCodeEnum.SUCCESS.getDescription());
+        rb.setCode(ResponseCodeEnum.SUCCESS.getKey());
+        rb.setMessage(ResponseCodeEnum.SUCCESS.getValue());
         rb.setData(data);
         return rb;
     }
@@ -85,8 +85,8 @@ public class ResponseResult {
      */
     public static ResponseResult error(BaseErrorInfoInterface errorInfo) {
         ResponseResult rb = new ResponseResult();
-        rb.setCode(errorInfo.getCode());
-        rb.setMessage(errorInfo.getDescription());
+        rb.setCode(errorInfo.getKey());
+        rb.setMessage(errorInfo.getValue());
         rb.setData(null);
         return rb;
     }
@@ -115,7 +115,7 @@ public class ResponseResult {
 
     @Override
     public String toString() {
-        return JSONObject.toJSONString(this);
+        return CommonUtil.toJsonString(this);
     }
 
 }

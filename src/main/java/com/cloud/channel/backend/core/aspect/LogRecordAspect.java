@@ -13,6 +13,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.alibaba.fastjson.JSONObject;
+import com.cloud.channel.backend.util.CommonUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -44,13 +45,13 @@ public class LogRecordAspect {
         // 获取请求参数集合并进行遍历拼接
         if (args.length > 0) {
             if (HttpMethod.POST.name().equals(method)) {
-                params = JSONObject.toJSONString(args);
+                params = CommonUtil.toJsonString(args);
             } else if (HttpMethod.GET.name().equals(method)) {
                 params = queryString;
             }
         }
         long l1 = System.currentTimeMillis();
-        log.info("请求开始===路径:{},请求方式:{},参数:{}", url, method, params);
+        log.info("请求开始===请求地址:{},请求方式:{},参数:{}", url, method, params);
         // result的值就是被拦截方法的返回值
         Object result = pjp.proceed();
         long l2 = System.currentTimeMillis();

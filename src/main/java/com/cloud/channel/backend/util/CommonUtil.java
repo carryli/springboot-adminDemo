@@ -6,6 +6,9 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+
 /**
  * @author Bruce
  * @classname CommonUtil
@@ -46,5 +49,15 @@ public class CommonUtil {
             }
         }
         return map;
+    }
+
+    /**
+     * 打印json 不过滤value为null
+     * 
+     * @param obj
+     * @return
+     */
+    public static String toJsonString(Object obj) {
+        return JSONObject.toJSONString(obj, SerializerFeature.WriteMapNullValue);
     }
 }

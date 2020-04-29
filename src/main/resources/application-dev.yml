@@ -1,0 +1,45 @@
+# 指定端口
+server:
+  port: 8602
+
+my:
+  api.url:
+    #服务id
+    serverId: 13001
+    #服务类型
+    serverType: 13
+    #Aes秘钥
+    aesKey: ~c!h@a#n$n%e^l&*
+    # 用户中心api地址
+    userApiUrl: http://localhost:8988/api
+    # 金币中心Api地址
+    goldApiUrl: http://192.168.1.19:7109/api
+    # 服务管理中心Api地址
+    serverApiUrl: http://192.168.1.12:7102/api
+    # 数据分析中心Api地址
+    dataApiUrl: http://192.168.1.51:7117/api
+    # 管理后台Api地址
+    adminApiUrl: http://192.168.1.53:7119/api
+    # 无限代Api地址
+    resellerUrl:  http://192.168.1.20:7110/api
+    # 渠道中心Api地址
+    channelApiUrl:  http://localhost:8401/api
+    # 活动系统Api地址
+    activityApiUrl:  http://192.168.1.18:7108/api
+    # 数据加密解密 url
+    signUrl:  http://192.168.1.222:9999/sign
+
+mongodb:
+  zone: db0
+  dbName: channel-backend
+
+
+# JWT相关配置
+jwt:
+  header: token
+  tokenHead: 1024|
+
+# Log
+logging:
+  config:
+    classpath: logback.xml

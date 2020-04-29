@@ -3,7 +3,7 @@ package com.cloud.channel.backend.core.exception;
 /**
  * @author Bruce
  * @classname BizException
- * @description TODO
+ * @description 自定义业务异常
  * @date 2020/4/24 0024 18:22
  */
 public class BizException extends RuntimeException {
@@ -24,15 +24,21 @@ public class BizException extends RuntimeException {
     }
 
     public BizException(BaseErrorInfoInterface errorInfoInterface) {
-        super(errorInfoInterface.getCode()+"");
-        this.errorCode = errorInfoInterface.getCode();
-        this.errorMsg = errorInfoInterface.getDescription();
+        super(errorInfoInterface.getKey() + "");
+        this.errorCode = errorInfoInterface.getKey();
+        this.errorMsg = errorInfoInterface.getValue();
     }
 
     public BizException(BaseErrorInfoInterface errorInfoInterface, Throwable cause) {
-        super(errorInfoInterface.getCode()+"", cause);
-        this.errorCode = errorInfoInterface.getCode();
-        this.errorMsg = errorInfoInterface.getDescription();
+        super(errorInfoInterface.getKey() + "", cause);
+        this.errorCode = errorInfoInterface.getKey();
+        this.errorMsg = errorInfoInterface.getValue();
+    }
+
+    public BizException(int errorCode) {
+        super(errorCode + "");
+        this.errorCode = errorCode;
+        this.errorMsg = ResponseCodeEnum.getValueByKey(errorCode);
     }
 
     public BizException(String errorMsg) {
@@ -41,17 +47,16 @@ public class BizException extends RuntimeException {
     }
 
     public BizException(int errorCode, String errorMsg) {
-        super(errorCode+"");
+        super(errorCode + "");
         this.errorCode = errorCode;
         this.errorMsg = errorMsg;
     }
 
     public BizException(int errorCode, String errorMsg, Throwable cause) {
-        super(errorCode+"", cause);
+        super(errorCode + "", cause);
         this.errorCode = errorCode;
         this.errorMsg = errorMsg;
     }
-
 
     public int getErrorCode() {
         return errorCode;
@@ -72,11 +77,6 @@ public class BizException extends RuntimeException {
     @Override
     public String getMessage() {
         return errorMsg;
-    }
-
-    @Override
-    public Throwable fillInStackTrace() {
-        return this;
     }
 
 }

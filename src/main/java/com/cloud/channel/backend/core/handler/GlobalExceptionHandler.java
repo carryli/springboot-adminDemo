@@ -34,7 +34,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = BizException.class)
     @ResponseBody
     public ResponseResult bizExceptionHandler(HttpServletRequest req, BizException e) {
-        log.error("发生业务异常！原因是：{}", e.getMessage());
+        log.error("发生业务异常！message：{}", e.getMessage());
         return ResponseResult.error(e.getErrorCode(), e.getMessage());
     }
 
@@ -50,8 +50,8 @@ public class GlobalExceptionHandler {
     public ResponseResult exceptionHandler(HttpServletRequest req, Exception e) {
         log.error("未知异常！原因是:", e);
         if (e instanceof MissingServletRequestParameterException || e instanceof MethodArgumentNotValidException) {
-            return ResponseResult.error(ResponseCodeEnum.REQUEST_PARAMS_ERROR.getCode(), e.getMessage());
+            return ResponseResult.error(ResponseCodeEnum.REQUEST_PARAMS_ERROR.getKey(), e.getMessage());
         }
-        return ResponseResult.error(ResponseCodeEnum.INTERNAL_SERVER_ERROR.getCode(), e.getMessage());
+        return ResponseResult.error(ResponseCodeEnum.INTERNAL_SERVER_ERROR.getKey(), e.getMessage());
     }
 }
