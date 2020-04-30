@@ -3,6 +3,7 @@ package com.cloud.channel.backend.business.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.cloud.channel.backend.business.service.BaseService;
+import com.cloud.channel.backend.core.ResponseResult;
 import com.cloud.channel.backend.core.config.ConfigBean;
 import com.cloud.channel.backend.core.exception.BizException;
 import com.cloud.channel.backend.core.exception.ResponseCodeEnum;
@@ -24,7 +25,7 @@ import java.util.HashMap;
  */
 @Slf4j
 @Service
-public class BaseServiceImpl implements BaseService {
+public abstract class BaseServiceImpl implements BaseService {
 
 
     @Autowired
@@ -70,4 +71,5 @@ public class BaseServiceImpl implements BaseService {
         return data;
 
     }
+
 }

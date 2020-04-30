@@ -43,4 +43,19 @@ public interface ServerCodeEnum {
      * 获取平台下渠道枚举
      */
     int SELECT_CHANNEL_ENUMS = 10009;
+
+    /**
+     * 新增/编辑支付信息
+     */
+    int SAVE_PAYMENT_INFO = 10010;
+
+    /**
+     * 删除支付信息
+     */
+    int DELETE_PAYMENT_INFO = 10011;
+
+    /**
+     * 查询支付信息
+     */
+    int SELECT_PAYMENT_INFO = 10012;
 }
