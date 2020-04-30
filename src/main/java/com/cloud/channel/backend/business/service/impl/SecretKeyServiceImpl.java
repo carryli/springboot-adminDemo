@@ -119,8 +119,8 @@ public class SecretKeyServiceImpl implements SecretKeyService {
         JSONObject paramJson = new JSONObject();
         paramJson.put("aesKey", configBean.getAesKey());
         // // 用户中心
-        CompletableFuture.runAsync(
-            () -> exchangeSecretKey(SecretCmd.USER, paramJson, configBean.getSignUrl(), configBean.getUserApiUrl()));
+        // CompletableFuture.runAsync(
+        // () -> exchangeSecretKey(SecretCmd.USER, paramJson, configBean.getSignUrl(), configBean.getUserApiUrl()));
         // // 金币中心
         // CompletableFuture.runAsync(() -> exchangeSecretKey(SecretCmd.ORDER, paramJson, signUrl, goldApiUrl));
         // // 无限代
@@ -131,8 +131,9 @@ public class SecretKeyServiceImpl implements SecretKeyService {
         // CompletableFuture.runAsync(() -> exchangeSecretKey(SecretCmd.DATA, paramJson, signUrl, dataApiUrl));
         // // 管理后台
         // CompletableFuture.runAsync(() -> exchangeSecretKey(SecretCmd.ADMIN, paramJson, signUrl, adminApiUrl));
-        // // 渠道中心
-        // CompletableFuture.runAsync(() -> exchangeSecretKey(SecretCmd.CHANNEL, paramJson, signUrl, channelApiUrl));
+        // 渠道中心
+        CompletableFuture.runAsync(() -> exchangeSecretKey(SecretCmd.CHANNEL, paramJson, configBean.getSignUrl(),
+            configBean.getChannelApiUrl()));
         // // 活动系统
         // CompletableFuture.runAsync(() -> exchangeSecretKey(SecretCmd.ACTIVITY, paramJson, signUrl, activityApiUrl));
     }

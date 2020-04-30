@@ -63,6 +63,14 @@ public class User implements Serializable {
      */
     private Integer channelId;
     /**
+     * 渠道名称
+     */
+    private String channelName;
+    /**
+     * 渠道等级 1,2,3
+     */
+    private Integer channelLevel;
+    /**
      * 创建者-平台运营后台管理员ID
      */
     private Long superId;

@@ -40,6 +40,9 @@ public class AccountController {
         user.setId(100000L);
         user.setAccount("admin");
         user.setPlatId(1001);
+        user.setChannelId(110000);
+        user.setChannelName("大鲤鱼了");
+        user.setChannelLevel(1);
         user.setPassWord("111111");
         if (!username.equals(user.getAccount()) || !password.equals(user.getPassWord())) {
             return ResponseResult.error(ResponseCodeEnum.USER_NOT_FOUND);

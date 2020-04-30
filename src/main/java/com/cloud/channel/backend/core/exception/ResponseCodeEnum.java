@@ -16,17 +16,17 @@ public enum ResponseCodeEnum implements BaseErrorInfoInterface {
      */
     SUCCESS(200, "成功!"),
     /**
-     * 用户不存在!
-     */
-    USER_NOT_FOUND(400, "请求的数据格式不符!"),
-    /**
      * 请求方式不支持!
      */
-    REQUEST_METHOD_NOT_SUPPORT(401, "请求方式不支持!"),
+    REQUEST_METHOD_NOT_SUPPORT(400, "请求方式不支持!"),
     /**
      * 请求参数错误!
      */
-    REQUEST_PARAMS_ERROR(402, "请求参数错误!"),
+    REQUEST_PARAMS_ERROR(401, "请求参数错误!"),
+    /**
+     * token已过期!
+     */
+    EXPIRED_TOKEN(402, "token已过期!"),
     /**
      * token认证失败!
      */

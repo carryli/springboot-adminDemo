@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 /**
  * @author by Bruce
- * @description 可删?
+ * @description
  * @date
  **/
 @Configuration
