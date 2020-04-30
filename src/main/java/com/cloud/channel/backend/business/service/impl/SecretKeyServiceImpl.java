@@ -33,52 +33,10 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Service
 @Slf4j
-public class SecretKeyServiceImpl implements SecretKeyService {
+public class SecretKeyServiceImpl extends BaseServiceImpl implements SecretKeyService {
 
     private final BaseDao<SecretKey> secretKeyDao = BaseDao.getInstance(SecretKey.class);
-    @Autowired
-    private ConfigBean configBean;
 
-    /**
-     * 发送请求
-     *
-     * @param apiUrl
-     *            请求地址
-     * @param cmd
-     *            命令
-     * @param params
-     *            请求参数
-     * @return 请求结果
-     */
-    @Override
-    public JSONObject sendRequest(String apiUrl, int cmd, JSONObject params) {
-        // 请求参数AES加密
-        String encrypt = AESUtils.encrypt(CommonUtil.toJsonString(params), configBean.getAesKey());
-        // 请求头
-        HashMap<String, String> headers = new HashMap<>(2);
-        String header = cmd + "|" + configBean.getServerId() + "|" + configBean.getServerType();
-        headers.put("header", header);
-        // 发送请求
-        String response = HttpClientUtil.doPost(apiUrl, encrypt, headers);
-        if (StringUtils.isEmpty(response)) {
-            log.error("发送请求错误:apiUrl={},cmd={},params={}", apiUrl, cmd, CommonUtil.toJsonString(params));
-            throw new BizException(ResponseCodeEnum.INTERNAL_SERVER_ERROR);
-        }
-        // 响应数据解密
-        String decrypt = AESUtils.decrypt(response, configBean.getAesKey());
-        // 转json对象
-        JSONObject data = JSON.parseObject(decrypt);
-        // 响应数据
-        int code = data.getIntValue("code");
-        if (code != ResponseCodeEnum.SUCCESS.getKey()) {
-            log.error("发送请求错误:apiUrl={},cmd={},params={}", apiUrl, cmd, CommonUtil.toJsonString(params));
-            throw new BizException(code);
-        }
-        // 移除状态码
-        data.remove("code");
-        return data;
-
-    }
 
     @Override
     public void exchangeSecretKey(int cmd, JSONObject params, String signUrl, String apiUrl) {

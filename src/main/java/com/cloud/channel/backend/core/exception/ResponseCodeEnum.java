@@ -16,9 +16,9 @@ public enum ResponseCodeEnum implements BaseErrorInfoInterface {
      */
     SUCCESS(200, "成功!"),
     /**
-     * 请求方式不支持!
+     * 用户不存在!
      */
-    REQUEST_METHOD_NOT_SUPPORT(400, "请求方式不支持!"),
+    USER_NOT_FOUND(400, "用户不存在!"),
     /**
      * 请求参数错误!
      */
@@ -36,6 +36,10 @@ public enum ResponseCodeEnum implements BaseErrorInfoInterface {
      */
     NOT_FOUND(404, "未找到该资源!"),
     /**
+     * 请求方式不支持!
+     */
+    REQUEST_METHOD_NOT_SUPPORT(405, "请求方式不支持!"),
+    /**
      * 服务器内部错误!
      */
     INTERNAL_SERVER_ERROR(500, "服务器内部错误!"),
@@ -44,7 +48,7 @@ public enum ResponseCodeEnum implements BaseErrorInfoInterface {
      */
     SERVER_BUSY(503, "服务器正忙，请稍后再试!"),
 
-    /******************************************USER****************************************************************/
+    /****************************************** USER ****************************************************************/
     /**
      * 设备解析错误
      */
@@ -144,8 +148,7 @@ public enum ResponseCodeEnum implements BaseErrorInfoInterface {
     /**
      * 输入上级id错误
      */
-    SUPERIOR_ID_ERROR(-1025, "输入上级id错误"),
-    ;
+    SUPERIOR_ID_ERROR(-1025, "输入上级id错误"),;
 
     /**
      * 错误码

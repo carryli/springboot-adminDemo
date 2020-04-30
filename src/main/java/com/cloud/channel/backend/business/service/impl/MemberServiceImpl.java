@@ -25,12 +25,8 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Service
-public class MemberServiceImpl implements MemberService {
+public class MemberServiceImpl extends BaseServiceImpl implements MemberService {
 
-    @Autowired
-    private SecretKeyService secretKeyService;
-    @Autowired
-    private ConfigBean configBean;
 
     @Override
     public ResponseResult selectUserByPage(UserQueryParam userQueryParam) {
@@ -39,7 +35,7 @@ public class MemberServiceImpl implements MemberService {
         JSONObject params = (JSONObject)JSON.toJSON(userQueryParam);
         params.put("platIds", Collections.singletonList(platId));
         JSONObject resultJson =
-            secretKeyService.sendRequest(configBean.getUserApiUrl(), ServerCodeEnum.SELECT_USER_BY_PAGE, params);
+            sendRequest(configBean.getUserApiUrl(), ServerCodeEnum.SELECT_USER_BY_PAGE, params);
         resultJson.put("memberList", resultJson.get("data"));
         resultJson.remove("data");
         return ResponseResult.success(resultJson);

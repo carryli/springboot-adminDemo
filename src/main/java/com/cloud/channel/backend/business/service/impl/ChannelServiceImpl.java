@@ -23,11 +23,8 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Service
-public class ChannelServiceImpl implements ChannelService {
-    @Autowired
-    private SecretKeyService secretKeyService;
-    @Autowired
-    private ConfigBean configBean;
+public class ChannelServiceImpl extends BaseServiceImpl implements ChannelService {
+
 
     @Override
     public ResponseResult selectChannelByPage(ChannelQueryParam channelQueryParam) {
@@ -39,7 +36,7 @@ public class ChannelServiceImpl implements ChannelService {
         // 查以自身id为上级id的渠道
         params.put("superiorChannelId", channelId);
         JSONObject resultJson =
-            secretKeyService.sendRequest(configBean.getChannelApiUrl(), ServerCodeEnum.SELECT_CHANNEL_BY_PAGE, params);
+            sendRequest(configBean.getChannelApiUrl(), ServerCodeEnum.SELECT_CHANNEL_BY_PAGE, params);
         resultJson.put("channelList", resultJson.get("data"));
         resultJson.remove("data");
         return ResponseResult.success(resultJson);
