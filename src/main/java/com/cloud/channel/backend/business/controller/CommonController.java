@@ -1,5 +1,6 @@
 package com.cloud.channel.backend.business.controller;
 
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import com.alibaba.fastjson.JSONObject;
@@ -18,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
  **/
 @RestController
 @Slf4j
+@Validated
 public class CommonController {
 
     @GetMapping("/test")

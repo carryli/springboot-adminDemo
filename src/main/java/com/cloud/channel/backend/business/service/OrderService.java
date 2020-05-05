@@ -32,4 +32,8 @@ public interface OrderService {
      * @return
      */
     ResponseResult deletePaymentInfo(String paymentInfoId);
+
+    ResponseResult createChannelOrder(Long amount, String paymentInfo);
+
+    ResponseResult updateChannelOrderStatus(String status, String orderId);
 }

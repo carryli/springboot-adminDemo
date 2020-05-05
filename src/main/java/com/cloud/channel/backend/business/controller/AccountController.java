@@ -2,6 +2,7 @@ package com.cloud.channel.backend.business.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +23,7 @@ import com.cloud.channel.backend.core.jwt.JwtUtils;
  * @date 2020/4/22 0022 20:28
  */
 @RestController
+@Validated
 @RequestMapping(value = "member")
 public class AccountController {
 
