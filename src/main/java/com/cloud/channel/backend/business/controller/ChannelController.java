@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 /**
  * @author Bruce
  * @classname ChannelController
@@ -30,7 +32,7 @@ public class ChannelController {
      * @return
      */
     @PostMapping("/selectChannelByPage")
-    public ResponseResult selectChannelByPage(@RequestBody ChannelQueryParam channelQueryParam) {
+    public ResponseResult selectChannelByPage(@Valid @RequestBody ChannelQueryParam channelQueryParam) {
         return channelService.selectChannelByPage(channelQueryParam);
     }
 }

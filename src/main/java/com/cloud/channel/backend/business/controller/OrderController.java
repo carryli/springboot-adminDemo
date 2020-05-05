@@ -1,10 +1,11 @@
 package com.cloud.channel.backend.business.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import com.cloud.channel.backend.business.objects.param.PaymentInfoParam;
 import com.cloud.channel.backend.business.service.OrderService;
 import com.cloud.channel.backend.core.ResponseResult;
 
@@ -24,9 +25,38 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @PostMapping("/selectMyPaymentInfo")
+    /**
+     * 查询支付信息
+     * 
+     * @return
+     */
+    @GetMapping("/selectMyPaymentInfo")
     public ResponseResult selectMyPaymentInfo() {
 
         return orderService.selectMyPaymentInfo();
+    }
+
+    /**
+     * 新增/编辑支付信息
+     * 
+     * @param paymentInfoParam
+     * @return
+     */
+    @PostMapping("/savePaymentInfo")
+    public ResponseResult savePaymentInfo(@Valid @RequestBody PaymentInfoParam paymentInfoParam) {
+
+        return orderService.savePaymentInfo(paymentInfoParam);
+    }
+
+    /**
+     * 删除支付信息
+     * 
+     * @param id
+     * @return
+     */
+    @DeleteMapping("/deletePaymentInfo")
+    public ResponseResult deletePaymentInfo(@RequestParam("id") String id) {
+
+        return orderService.deletePaymentInfo(id);
     }
 }

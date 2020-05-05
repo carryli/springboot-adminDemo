@@ -12,6 +12,8 @@ import com.cloud.channel.backend.core.ResponseResult;
 
 import lombok.extern.slf4j.Slf4j;
 
+import javax.validation.Valid;
+
 /**
  * @author Bruce
  * @classname MemberController
@@ -27,7 +29,7 @@ public class MemberController {
     private MemberService memberService;
 
     @PostMapping("/selectUserByPage")
-    public ResponseResult selectUserByPage(@RequestBody UserQueryParam userQueryParam) {
+    public ResponseResult selectUserByPage(@Valid @RequestBody UserQueryParam userQueryParam) {
         return memberService.selectUserByPage(userQueryParam);
     }
 }

@@ -4,6 +4,7 @@ import com.lamfire.jmongo.annotations.Indexed;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 /**
  * @author Bruce
@@ -12,8 +13,9 @@ import javax.validation.constraints.NotNull;
  * @date 2020/4/29 0029 19:53
  */
 @Data
-public class ChannelQueryParam {
+public class ChannelQueryParam implements Serializable {
 
+    private static final long serialVersionUID = -8711241796898988682L;
     /**
      * 平台id
      */

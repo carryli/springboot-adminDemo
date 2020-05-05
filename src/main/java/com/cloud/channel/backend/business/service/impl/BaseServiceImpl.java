@@ -53,7 +53,7 @@ public abstract class BaseServiceImpl implements BaseService {
         // 发送请求
         String response = HttpClientUtil.doPost(apiUrl, encrypt, headers);
         if (StringUtils.isEmpty(response)) {
-            log.error("发送请求错误:apiUrl={},cmd={},params={}", apiUrl, cmd, CommonUtil.toJsonString(params));
+            log.error("请求目标服务器异常:apiUrl={},cmd={},params={}", apiUrl, cmd, CommonUtil.toJsonString(params));
             throw new BizException(ResponseCodeEnum.INTERNAL_SERVER_ERROR);
         }
         // 响应数据解密
@@ -63,7 +63,7 @@ public abstract class BaseServiceImpl implements BaseService {
         // 响应数据
         int code = data.getIntValue("code");
         if (code != ResponseCodeEnum.SUCCESS.getKey()) {
-            log.error("发送请求错误:apiUrl={},cmd={},params={}", apiUrl, cmd, CommonUtil.toJsonString(params));
+            log.error("请求非正常状态码:apiUrl={},cmd={},params={}", apiUrl, cmd, CommonUtil.toJsonString(params));
             throw new BizException(code);
         }
         // 移除状态码

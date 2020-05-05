@@ -148,8 +148,57 @@ public enum ResponseCodeEnum implements BaseErrorInfoInterface {
     /**
      * 输入上级id错误
      */
-    SUPERIOR_ID_ERROR(-1025, "输入上级id错误"),;
+    SUPERIOR_ID_ERROR(-1025, "输入上级id错误"),
 
+    /****************************************** CHANNEL ****************************************************************/
+
+    /**
+     * 参数验证失败
+     */
+    CHANNEL_PARAMS_VALID_FAIL_ERROR(-10001, "参数验证失败"),
+
+    /**
+     * 渠道不存在错误
+     */
+    CHANNEL_NOT_EXIST_ERROR(-10002, "渠道不存在错误"),
+
+    /**
+     * 渠道不可编辑错误
+     */
+    CHANNEL_UNABLE_EDIT_ERROR(-10003, "渠道不可编辑错误"),
+
+    /**
+     * 渠道不可扩展错误
+     */
+    CHANNEL_UNABLE_EXPAND_ERROR(-10004, "渠道不可扩展错误"),
+
+    /**
+     * 渠道订单不存在错误
+     */
+    CHANNEL_ORDER_NOT_EXIST_ERROR(-10005, "渠道订单不存在错误"),
+
+    /**
+     * 渠道订单状态操作错误
+     */
+    CHANNEL_ORDER_STATUS_OPE_ERROR(-10006, "渠道订单状态操作错误"),
+
+    /**
+     * 支付信息不存在
+     */
+    CHANNEL_PAYMENT_INFO_NOT_EXIST_ERROR(-10007, "支付信息不存在"),
+
+    /**
+     * 绑定支付信息超过上限
+     */
+    CHANNEL_PAYMENT_OVER_BINDING_ERROR(-10008, "绑定支付信息超过上限"),
+
+    /**
+     * 没有操作权限
+     */
+    NO_OPERATING_PRIVILEGES(-10009, "没有操作权限"),
+
+
+    ;
     /**
      * 错误码
      */

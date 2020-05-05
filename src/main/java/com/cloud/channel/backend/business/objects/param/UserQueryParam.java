@@ -4,6 +4,8 @@ import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @author Bruce
  * @classname UserQueryParam
@@ -11,8 +13,9 @@ import lombok.Data;
  * @date 2020/4/29 0029 10:41
  */
 @Data
-public class UserQueryParam {
+public class UserQueryParam implements Serializable {
 
+    private static final long serialVersionUID = 770614065239535127L;
     /**
      * 会员短号id
      */
