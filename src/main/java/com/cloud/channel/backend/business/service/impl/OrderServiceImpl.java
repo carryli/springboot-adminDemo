@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.cloud.channel.backend.business.constant.ServerCodeEnum;
+import com.cloud.channel.backend.business.objects.param.ChannelOrderParam;
 import com.cloud.channel.backend.business.objects.param.PaymentInfoParam;
 import com.cloud.channel.backend.business.objects.pojo.User;
 import com.cloud.channel.backend.business.service.OrderService;
@@ -88,6 +89,35 @@ public class OrderServiceImpl extends BaseServiceImpl implements OrderService {
         params.put("orderId", orderId);
         JSONObject resultJson =
             sendRequest(configBean.getChannelApiUrl(), ServerCodeEnum.UPDATE_CHANNEL_ORDER_STATUS, params);
+
+        return ResponseResult.success(resultJson);
+    }
+
+    @Override
+    public ResponseResult selectMyChannelOrders(Integer pageNumber, Integer pageSize) {
+        // 获取当前用户
+        User user = AppContext.currentUser();
+        JSONObject params = new JSONObject();
+        params.put("platId", user.getPlatId());
+        params.put("channelId", user.getChannelId());
+        params.put("pageNumber", pageNumber);
+        params.put("pageSize", pageSize);
+        JSONObject resultJson =
+            sendRequest(configBean.getChannelApiUrl(), ServerCodeEnum.SELECT_CHANNEL_ORDER_BY_PAGE, params);
+
+        return ResponseResult.success(resultJson);
+    }
+
+    @Override
+    public ResponseResult selectNextChannelOrders(ChannelOrderParam channelOrderParam) {
+        // 获取当前用户
+        User user = AppContext.currentUser();
+        JSONObject params = (JSONObject)JSON.toJSON(channelOrderParam);
+        params.put("platId", user.getPlatId());
+        // 以自身渠道id作为查询条件
+        params.put("superiorChannelId", user.getChannelId());
+        JSONObject resultJson =
+            sendRequest(configBean.getChannelApiUrl(), ServerCodeEnum.SELECT_CHANNEL_ORDER_BY_PAGE, params);
 
         return ResponseResult.success(resultJson);
     }

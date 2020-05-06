@@ -1,9 +1,11 @@
 package com.cloud.channel.backend.business.controller;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
+import com.cloud.channel.backend.business.objects.param.ChannelOrderParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -62,6 +64,32 @@ public class OrderController {
     public ResponseResult deletePaymentInfo(@RequestParam("id") String id) {
 
         return orderService.deletePaymentInfo(id);
+    }
+
+    /**
+     * 查找我的渠道订单
+     * 
+     * @param pageNumber
+     * @param pageSize
+     * @return
+     */
+    @PostMapping("/selectMyChannelOrders")
+    public ResponseResult selectMyChannelOrders(@Min(value = 1) @RequestParam("pageNumber") Integer pageNumber,
+        @Max(value = 200) @RequestParam("pageSize") Integer pageSize) {
+
+        return orderService.selectMyChannelOrders(pageNumber, pageSize);
+    }
+
+    /**
+     * 查找我的下级渠道订单
+     * 
+     * @param channelOrderParam
+     * @return
+     */
+    @PostMapping("/selectNextChannelOrders")
+    public ResponseResult selectNextChannelOrders(@Valid @RequestBody ChannelOrderParam channelOrderParam) {
+
+        return orderService.selectNextChannelOrders(channelOrderParam);
     }
 
     /**

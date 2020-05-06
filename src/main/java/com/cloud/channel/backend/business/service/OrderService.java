@@ -1,5 +1,6 @@
 package com.cloud.channel.backend.business.service;
 
+import com.cloud.channel.backend.business.objects.param.ChannelOrderParam;
 import com.cloud.channel.backend.business.objects.param.PaymentInfoParam;
 import com.cloud.channel.backend.core.ResponseResult;
 
@@ -36,4 +37,8 @@ public interface OrderService {
     ResponseResult createChannelOrder(Long amount, String paymentInfo);
 
     ResponseResult updateChannelOrderStatus(String status, String orderId);
+
+    ResponseResult selectMyChannelOrders(Integer pageNumber, Integer pageSize);
+
+    ResponseResult selectNextChannelOrders(ChannelOrderParam channelOrderParam);
 }
